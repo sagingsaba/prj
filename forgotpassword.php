@@ -51,7 +51,7 @@ $id = $_GET['id'];
 <body>
   <!-- Navigation bar -->
   <div class="navbar">
-  <a href="https://www.youtube.com/watch?v=nUHTLyT7GmM">Sample Website</a>
+  <a href="index.php">Sample Website</a>
        
         <!-- You can add more links here -->
     </div>

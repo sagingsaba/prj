@@ -75,64 +75,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php
         if (isset($message)) {
            
-
-  
                 echo '<p class="red-text">' . $message . '</p>';
                 
         }
         ?>
- 
-
-
         
     </div>
 </div>
 
 
-
-
-
-<!-- resend timer js -->
-
-
-<!-- <script>
-    let timer;
-    let timeLeft = 30; // Set the timer duration in seconds
-
-    function startTimer() {
-        timer = setInterval(() => {
-            document.getElementById('timer').innerText = `Resend OTP in ${timeLeft} seconds`;
-            timeLeft--;
-
-            if (timeLeft < 0) {
-                clearInterval(timer);
-                document.getElementById('timer').innerText = '';
-                document.getElementById('resendButton').style.display = 'inline-block';
-            }
-        }, 1000);
-    }
-
-    function submitForm() {
-        clearInterval(timer); // Stop the timer on form submission
-        document.getElementById('loadingScreen').style.display = 'block';
-        // Perform form submission logic here
-        // Example: document.getElementById('otpForm').submit();
-    }
-
-    function resendOTP() {
-        // Perform OTP resend logic here
-        // Example: Call a function to resend OTP
-        // For demonstration, reset the timer and hide the resend button
-        timeLeft = 30; // Reset timer
-        document.getElementById('timer').innerText = 'Resending OTP...';
-        document.getElementById('resendButton').style.display = 'none';
-        startTimer(); // Restart the timer
-    }
-
-    window.onload = function() {
-        startTimer(); // Start the timer when the window loads
-    };
-</script>
-
 </body>
-</html> -->
+</html>

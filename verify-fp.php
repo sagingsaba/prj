@@ -24,7 +24,7 @@ try {
                 forgotpass($email, $fname, $id);
                 $showPopup = true; // Set the flag to display the success popup
             } else {
-                $message = 'Invalid email, please use your email to change your password.';
+                $message = 'Invalid email, make sure you are already registered.';
             }
         }
     }
@@ -41,51 +41,98 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
+       <style>
+        /* Loader styles */
+        .loader {
+            position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333333;
+    transition: opacity 0.75s, visibility 0.75s;
+            display: none; /* Initially hidden */
+        }
+
+        /* Overlay styles */
+        .overlay {
+        position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.0);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            
+        }
+    </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="index.php">Sample Website</a>
+
+<div class="navbar">
+    <a href="index.php">Sample Website</a>
+</div>
+
+<div class="container">
+    <h3>Forgot Password</h3>
+    <form id="emailForm" method="POST">
+        <label for="email">Enter Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <input type="submit" value="Submit" id="submitButton" name="reset">
+    </form>
+
+    <!-- Add overlay to HTML -->
+    <div class="overlay" id="overlay">
+        <div class="loader"></div>
     </div>
 
-    <div class="container">
-        <h3>Forgot Password</h3>
-        <form id="emailForm" method="POST">
-            <label for="email">Enter Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <input type="submit" value="Submit" id="submitButton" name="reset">
-        </form>
+    <?php if ($showPopup) { ?>
+        <div class="popup" id="popup">
+            <img src="./include/img/404-tick.png">
+            <h3> Success! </h3>
+            <p>Please check your email. Thanks!</p>
+            <button type="button" onclick="closePopup()">OK</button>
+        </div>
+    <?php } elseif (isset($message)) {
+        echo '<p class="red-text">' . $message . '</p>';
+    } ?>
+</div>
 
-        <?php if ($showPopup) { ?>
-            <div class="popup" id="popup">
-                <img src="./include/img/404-tick.png">
-                <h3> Success! </h3>
-                <p>Please check your email. Thanks!</p>
-                <button type="button" onclick="closePopup()">OK</button>
-            </div>
-            <?php
+<script>
+    // Function to show/hide the overlay
+    function toggleOverlay() {
+        const overlay = document.getElementById("overlay");
+        overlay.classList.toggle("show");
+    }
 
-} elseif (isset($message)) {
+    // Function to open the popup
+    function openPopup() {
+        const popup = document.getElementById("popup");
+        popup.classList.add("open-popup");
+    }
 
-  
-    echo '<p class="red-text">' . $message . '</p>';
-}
-?>
+    // Function to close the popup
+    function closePopup() {
+        const popup = document.getElementById("popup");
+        popup.classList.remove("open-popup");
+    }
 
-    </div>
+    // Add an event listener to the form submission
+    const form = document.getElementById("emailForm");
+    form.addEventListener("submit", function (event) {
+        toggleOverlay(); // Show the overlay when the form is submitted
+        document.getElementById("overlay").classList.add("show");
+    });
 
-    <script>
-        let popup = document.getElementById("popup");
-        function openPopup() {
-            popup.classList.add("open-popup");
-        }
-        function closePopup() {
-            popup.classList.remove("open-popup");
-        }
-
-        // Call openPopup function if PHP condition is met
-        <?php if ($showPopup) { ?>
-            openPopup();
-        <?php } ?>
-    </script>
+    // Call openPopup function if PHP condition is met
+    <?php if ($showPopup) { ?>
+    openPopup();
+    <?php } ?>
+</script>
 </body>
 </html>

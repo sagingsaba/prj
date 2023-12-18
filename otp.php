@@ -30,9 +30,9 @@ function sendMail($email, $firstname) {
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('samplewebemail@gmail.com', 'sampleSite');
+    $mail->setFrom('samplewebemail@gmail.com', 'Spotifake');
     $mail->addAddress( $email, $firstname,);     //Add a recipient
-    $mail->addReplyTo('samplewebemail@gmail.com', 'sampleSite');
+    $mail->addReplyTo('samplewebemail@gmail.com', 'Spotifake');
 
     // GENERATING RANDOM NUMBER
     $random_number = ranNum();
@@ -75,9 +75,9 @@ function sendVerificationEmail($email, $firstname,$pass) {
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('samplewebemail@gmail.com', 'sampleSite');
+    $mail->setFrom('samplewebemail@gmail.com', 'Spotifake');
     $mail->addAddress( $email, $firstname);     //Add a recipient
-    $mail->addReplyTo('samplewebemail@gmail.com', 'sampleSite');
+    $mail->addReplyTo('samplewebemail@gmail.com', 'Spotifake');
 
     // GENERATING RANDOM NUMBER
     // $random_pwd = ranPWD();
@@ -159,9 +159,9 @@ function forgotpass($email, $firstname, $id) {
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('samplewebemail@gmail.com', 'sampleSite');
+    $mail->setFrom('samplewebemail@gmail.com', 'Spotifake');
     $mail->addAddress($email, $firstname,);     //Add a recipient
-    $mail->addReplyTo('samplewebemail@gmail.com', 'sampleSite');
+    $mail->addReplyTo('samplewebemail@gmail.com', 'Spotifake');
 
     // GENERATING RANDOM NUMBER
 
