@@ -103,6 +103,7 @@ try {
             <p>Please check your email. Thanks!</p>
             <button type="button" onclick="closePopup()">OK</button>
         </div>
+        
     <?php } elseif (isset($message)) {
         echo '<p class="red-text">' . $message . '</p>';
     } ?>

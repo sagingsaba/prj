@@ -18,7 +18,7 @@ try {
 
     if (isset($_POST["login"])) {
         if (empty($_POST["email"]) || empty($_POST["password"])) {
-            $message = 'All fields are required';
+            $message = 'Please provide both your email and password for login.';
         } else {
             $pdoQuery = "SELECT * FROM user WHERE email = ?";
             $pdoResult = $pdoConnect->prepare($pdoQuery);
@@ -41,10 +41,10 @@ try {
 
                 redirect("home.php");
             } else {
-                $message = "Wrong email or password";
+                $message = "The email or password provided is incorrect.";
             }
         }else {
-            $message = "no data found";
+            $message = "The entered email is not registered.";
         }
 
         }
@@ -77,12 +77,7 @@ try {
 
 
     <div class="container">
-        <?php 
-        if (isset($message)) {
-            displayMessage($message);
-        }
-        ?>
-
+   
         <h3>Login Sample</h3>
         <form method="post">
             <label for="email">Email</label>
@@ -97,5 +92,12 @@ try {
         <a href="verify-fp.php">Forgot Password?</a>
         <br>
         <p class="sign_up">Don't have an account? <a href="register.php">Sign up here</a>.</p>
+        <?php 
+        if (isset($message)) {
+            displayMessage($message);
+        }
+        ?>
     </div>
 
+</body>
+</html>

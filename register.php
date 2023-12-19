@@ -4,6 +4,10 @@ session_start();
 require_once './include/connect/dbcon.php';
 require_once 'otp.php';
 
+function displayMessage($message) {
+    echo '<div class="message">' . $message . '</div>';
+}
+
 if (isset($_POST['register'])) {
     $firstname = htmlspecialchars(trim($_POST['regfirstname'] ?? ''));
     $middlename = htmlspecialchars(trim($_POST['regmiddlename'] ?? ''));
@@ -16,7 +20,9 @@ if (isset($_POST['register'])) {
     $existingUser = $checkResult->fetch(PDO::FETCH_ASSOC);
     
     if ($existingUser) {
-        echo "<label>Email has been taken.</label>";
+        $message = "Email has been taken.";
+        // Display the message here
+      
     } else {
         $_SESSION['registration_data'] = [
             'firstname' => $firstname,
@@ -94,7 +100,13 @@ if (isset($_POST['register'])) {
 
         <div>
             <p>Already have an account? <a href="index.php">Log in here</a>.</p>
+      
         </div>
+        <?php 
+        if (isset($message)) {
+            echo '<p class="red-text">' . $message . '</p>';
+        }
+        ?>
     </div>
 
     <script>
