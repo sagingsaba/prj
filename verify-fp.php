@@ -78,9 +78,14 @@ try {
     <a href="index.php">Sample Website</a>
 </div>
 
+<div class="loader" id="loader"></div>
+    <div class="overlay" id="overlay"></div>
+
+
+
 <div class="container">
     <h3>Forgot Password</h3>
-    <form id="emailForm" method="POST">
+    <form id="emailForm" method="POST" onsubmit="showLoader()">
         <label for="email">Enter Email:</label><br>
         <input type="email" id="email" name="email" required><br>
         <input type="submit" value="Submit" id="submitButton" name="reset">
@@ -104,6 +109,12 @@ try {
 </div>
 
 <script>
+
+       // JavaScript to show/hide loader and overlay
+       function showLoader() {
+            document.getElementById('loader').style.display = 'flex';
+            document.getElementById('overlay').style.display = 'block';
+        }
     // Function to show/hide the overlay
     function toggleOverlay() {
         const overlay = document.getElementById("overlay");

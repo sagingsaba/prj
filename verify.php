@@ -51,9 +51,40 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
+    <style>
+        /* Loader styles */
+        .loader {
+            position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333333;
+    transition: opacity 0.75s, visibility 0.75s;
+            display: none; /* Initially hidden */
+        }
 
+        /* Overlay styles */
+        .overlay {
+        position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.0);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            
+        }
+    </style>
 </head>
 <body>
+<div class="loader" id="loader"></div>
+    <div class="overlay" id="overlay"></div>
 
   <!-- Navigation bar -->
   <div class="navbar">
@@ -63,7 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="main">
     <div class="container">
-        <form action="" method="POST" id="otpForm" onsubmit="showLoading()">
+    <form action="" method="POST" id="otpForm" onsubmit="showLoader()">
+
             <h5 style="text-align: center; margin-bottom: 10px">We've sent the OTP to <?php echo htmlspecialchars($email); ?></h5>
             <input type="text" name="otpCode" value="" placeholder="Enter OTP" id="otpInput">
             <input type="submit" name="submit" value="Submit">
@@ -82,7 +114,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
     </div>
 </div>
-
+<script>
+        // JavaScript to show/hide loader and overlay
+        function showLoader() {
+            document.getElementById('loader').style.display = 'flex';
+            document.getElementById('overlay').style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
