@@ -36,10 +36,25 @@ $firstname = $_SESSION["firstname"];
         <p>Login successful. This is your home page.</p>
         <!-- Additional content for the home page can be added here -->
         <form action="logout.php" method="post">
-            <input type="submit" name="logout" value="Logout">
+     <!-- Example input button using the new style -->
+<input type="button" name="logout" value="Logout" onclick="confirmLogout()" class="styled-button">
+
+
+        
             </div>
         </form> <br>
         <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1xn54DMo2qIqBuMqHtUsFd?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
+    <script>
+        function confirmLogout() {
+            if (confirm("Are you sure you want to logout?")) {
+             
+                window.location = "logout.php";
+            } else {
+                // If user cancels, do nothing
+                // You can add any additional action here if needed
+            }
+        }
+    </script>
 </body>
 </html>

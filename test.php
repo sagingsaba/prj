@@ -1,39 +1,13 @@
 <?php
 session_start();
 
-require_once './include/connect/dbcon.php';
-require_once 'otp.php';
-
-$showPopup = false; // Initialize $showPopup variable
-
-try {
-    $pdoConnect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    if (isset($_POST['reset'])) {
-        if (empty($_POST["email"])) {
-            $message = 'enter your email';
-        } else {
-            $email = $_POST['email'];
-            $result = selectuser($pdoConnect, $email);
-            $count = $result['count'];
-            $showPopup = true; // Set the flag to display the success popup
-
-
-            if ($count > 0) {
-                $row = $result['row'];
-                $fname = $row['firstname'];
-                $id = $row['id'];
-                forgotpass($email, $fname, $id);
-              
-            } else {
-                $message = 'Invalid email, please use your email to change your password.';
-            }
-        }
-    }
-} catch (PDOException $error) {
-    echo $error->getMessage();
+// Check if the user is logged in; otherwise, redirect to the login page
+if (!isset($_SESSION["email"])) {
+    header("Location: index.php");
     exit;
 }
+
+$firstname = $_SESSION["firstname"];
 ?>
 
 <!DOCTYPE html>
@@ -41,47 +15,41 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
-</head>
-<body>
-    <div class="navbar">
-        <a href="index.php">Sample Website</a>
-    </div>
-
-    <div class="container">
-        <h3>Forgot Password</h3>
-        <form id="emailForm" method="POST">
-            <label for="email">Enter Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <input type="submit" value="Submit" id="submitButton" name="reset">
-        </form>
-
-        <?php if ($showPopup) { ?>
-            <div class="popup" id="popup">
-                <img src="./include/img/404-tick.png">
-                <h3> Success! </h3>
-                <p>Please check your email. Thanks!</p>
-                <button type="button" onclick="closePopup()">OK</button>
-            </div>
-        <?php } elseif (isset($message)) { ?>
-            <p><?php echo $message; ?></p>
-        <?php } ?>
-    </div>
+    <title>Welcome</title>
 
     <script>
-        let popup = document.getElementById("popup");
-        function openPopup() {
-            popup.classList.add("open-popup");
+        function confirmLogout() {
+            if (confirm("Are you sure you want to logout?")) {
+                // If user confirms, proceed with logout
+                window.location = "logout.php";
+            } else {
+                // If user cancels, do nothing
+                // You can add any additional action here if needed
+            }
         }
-        function closePopup() {
-            popup.classList.remove("open-popup");
-        }
-
-        // Call openPopup function if PHP condition is met
-        <?php if ($showPopup) { ?>
-            openPopup();
-        <?php } ?>
     </script>
+</head>
+<body>
+
+  <!-- Navigation bar -->
+  <div class="navbar">
+    <a href="home.php">Sample Website</a>
+       
+        <!-- You can add more links here -->
+    </div>
+
+
+    <div class="main">
+        <div class="container">
+            <h1>Welcome, <?php echo htmlspecialchars($firstname); ?>!</h1>
+            <p>Login successful. This is your home page.</p>
+            <!-- Additional content for the home page can be added here -->
+            <input type="button" name="logout" value="Logout" onclick="confirmLogout()">
+        </div>
+        <br>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1xn54DMo2qIqBuMqHtUsFd?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+
 </body>
 </html>

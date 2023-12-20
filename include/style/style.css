@@ -88,7 +88,7 @@ input:-webkit-autofill {
     transition: background-color 5000s ease-in-out 0s; 
 }
 
-
+input[type="button"],
 input[type="email"],
 input[type="text"],
 input[type="password"],
@@ -104,7 +104,7 @@ input[type="submit"] {
 
 
 
-
+input[type="button"],
 input[type="submit"] {
     width: auto;
     background: linear-gradient(45deg,  #4b9331, #6fd649);
@@ -112,9 +112,16 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+
+input[type="button"]:hover,
 input[type="submit"]:hover {
     background: linear-gradient(45deg,#346622, #4b9331);
 }
+
+
+/* CSS for styling the input button */
+
+
 
 a {
     text-decoration: none;
@@ -306,3 +313,6 @@ a:hover{  color: #4b9331; /* Medium sea green link color */}
         .overlay.show {
             display: flex;
         }
+
+
+

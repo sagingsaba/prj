@@ -164,18 +164,22 @@ function forgotpass($email, $firstname, $id) {
     $mail->addReplyTo('samplewebemail@gmail.com', 'Spotifake');
 
     // GENERATING RANDOM NUMBER
+$token = ranPWD();
+$time = time();
+$_SESSION['tok'] = $token ."-".$time;
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Forgot Password';
     $mail->Body = "<h2>Change Password Request</h2><br>
                Hi " . $firstname . '<br>
-               Here is the link to change your password <a href="http://localhost/prj/forgotpassword.php?id=' . $id . '">change password</a>,
+               Here is the link to change your password <a href="http://localhost/prj/forgotpassword.php?id='.$id.'&token='.$token.'">Forgot Password</a>
+               ,
                if you did not request this you can ignore it safely.'; 
-    $mail->AltBody = 'Here is: <a href="http://localhost/prj/forgotpassword.php?id=' . $id . '">change password</a>';
+    $mail->AltBody = 'Here is: <a href="http://localhost/prj/forgotpassword.php?id='.$id.'&token='.$token.'">Forgot Password</a>';
 
 
-    // SESSION THE OTP
+    
 
     $mail->send();
   } catch (Exception $e) {

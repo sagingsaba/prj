@@ -66,14 +66,13 @@ try {
 </head>
 
 <body>
-    
+
   <!-- Navigation bar -->
   <div class="navbar">
         <a href="index.php">Sample Website</a>
        
         <!-- You can add more links here -->
     </div>
-
 
 
     <div class="container">

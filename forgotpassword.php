@@ -1,11 +1,26 @@
 <?php
 require_once './include/connect/dbcon.php';
-// require_once 'otp.php';
+require_once 'otp.php';
+session_start();
 
+
+$tokenAndTime = $_SESSION['tok'];
+$tokenAndTimeArray = explode('-', $tokenAndTime);
+$time = $tokenAndTimeArray[1];
+$token  = $tokenAndTimeArray[0];
+
+$tokenurl = $_GET['token'];
+$expiration = $time+600;
+// echo $tokenurl;
+echo $time." ".$expiration." ".$token." ".$tokenurl;
+
+if ($tokenurl === $token && $time<$expiration) {
 if (isset($_GET['id'])) {
 $id = $_GET['id'];
 
-
+}else{
+header("location:index.php");
+}
   if(isset($_POST['reset'])){
     
     if (empty($_POST["new-password"]) || empty($_POST["confirm-password"])) {
@@ -33,7 +48,13 @@ $id = $_GET['id'];
 
       }
     }
-  }
+  
+}else{
+  echo "token expired";
+  unset($_SESSION['tok']);
+ 
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
