@@ -10,7 +10,7 @@ $time = $tokenAndTimeArray[1];
 $token  = $tokenAndTimeArray[0];
 
 $tokenurl = $_GET['token'];
-$expiration = $time+600;
+$expiration = $time+60;
 // echo $tokenurl;
 echo $time." ".$expiration." ".$token." ".$tokenurl;
 
