@@ -36,8 +36,11 @@ $firstname = $_SESSION["firstname"];
       <span class="close">&times;</span>
       <h2>Log Out?</h2>
       <p>Are you sure you want to log out?</p>
-      <button id="confirmBtn">Confirm</button>
-     <button id="cancelBtn">Cancel</button>
+      <div class="passbuttonContainer">
+
+  <button id="confirmBtn">Confirm</button>
+  <button id="cancelBtn">Cancel</button>
+</div>
     </div>
   </div>
 

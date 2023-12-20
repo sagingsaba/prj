@@ -364,13 +364,17 @@ button {
 
 /* Specific Button Styles */
 #confirmBtn {
-  background-color: #4caf50;
+  background-color: #6fd649;
   color: white;
 }
 
 #cancelBtn {
   background-color: #f44336;
   color: white;
+}
+.passbuttonContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Hover Effects for Buttons */
