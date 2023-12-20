@@ -31,30 +31,64 @@ $firstname = $_SESSION["firstname"];
 
     <div class="main">
     <div>
+    <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Log Out?</h2>
+      <p>Are you sure you want to log out?</p>
+      <button id="confirmBtn">Confirm</button>
+     <button id="cancelBtn">Cancel</button>
+    </div>
+  </div>
+
+            
+
+
     <div class="container">
         <h1>Welcome, <?php echo htmlspecialchars($firstname); ?>!</h1>
         <p>Login successful. This is your home page.</p>
         <!-- Additional content for the home page can be added here -->
         <form action="logout.php" method="post">
      <!-- Example input button using the new style -->
-<input type="button" name="logout" value="Logout" onclick="confirmLogout()" class="styled-button">
+     
+     <input type="button" id="logoutBtn" name="logout" value="Logout" class="styled-button">
 
-
-        
-            </div>
-        </form> <br>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1xn54DMo2qIqBuMqHtUsFd?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
+    </form> <br>
+  
+       
+     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1xn54DMo2qIqBuMqHtUsFd?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+ 
     <script>
-        function confirmLogout() {
-            if (confirm("Are you sure you want to logout?")) {
-             
-                window.location = "logout.php";
-            } else {
-                // If user cancels, do nothing
-                // You can add any additional action here if needed
-            }
-        }
-    </script>
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      document.getElementById('logoutModal').style.display = 'block';
+    });
+
+    document.querySelector('.close').addEventListener('click', function() {
+      document.getElementById('logoutModal').style.display = 'none';
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+      document.getElementById('logoutModal').style.display = 'none';
+    });
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+      // Redirect to logout PHP script or perform logout actions here
+      // For example, redirecting to a PHP logout script
+      window.location.href = 'logout.php';
+    });
+  </script>
+
+  <?php
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Perform logout actions here, for example:
+    // Destroy session, clear cookies, etc.
+    // Redirect to login page after logout
+    header('Location: login.php');
+    exit();
+  }
+  ?>
+
 </body>
 </html>
