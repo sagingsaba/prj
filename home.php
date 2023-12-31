@@ -1,108 +1,97 @@
 <?php
-require_once './include/connect/dbcon.php';
-require_once 'otp.php';
 session_start();
 
-
-$tokenAndTime = $_SESSION['tok'];
-$tokenAndTimeArray = explode('-', $tokenAndTime);
-$time = $tokenAndTimeArray[1];
-$token  = $tokenAndTimeArray[0];
-
-$tokenurl = $_GET['token'];
-$expiration = $time+3600;
-// echo $tokenurl;
-// echo $time." ".$expiration." ".$token." ".$tokenurl;
-
-if ($tokenurl === $token && $time<$expiration) {
-if (isset($_GET['id'])) {
-$id = $_GET['id'];
-
-}else{
-header("location:index.php");
+// Check if the user is logged in; otherwise, redirect to the login page
+if (!isset($_SESSION["email"])) {
+    header("Location: index.php");
+    exit;
 }
-  if(isset($_POST['reset'])){
-    
-    if (empty($_POST["new-password"]) || empty($_POST["confirm-password"])) {
-      
-      echo "All fields are required";
-    }else{
 
-      
-    $newpass = $_POST['new-password'];
-    $confpass = $_POST['confirm-password']; 
-
-      if($newpass == $confpass){
-        echo $confpass;
-        $hashedpass = password_hash($confpass, PASSWORD_DEFAULT);
-      $sql = "UPDATE user SET password = ? WHERE id = ?";
-      $pdoResult = $pdoConnect->prepare($sql);
-      $pdoResult->execute([$hashedpass,$id]);
-
-      echo"pass updated.";
-      header("location:index.php");
-      exit();
-      
-          }else {
-            echo"password did not match.";
-          }
-
-      }
-    }
-  
-}else{
-  echo "Link expired";
-  unset($_SESSION['tok']);
- 
-  exit();
-}
+$firstname = $_SESSION["firstname"];
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Reset Password</title>
-  <link rel="stylesheet" type="text/css" href="./include/style/style.css">
-  <style>
-    .error {
-      color: red;
-      font-size: 0.8em;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./include/style/style.css">
+    <title>Welcome</title>
+
 </head>
 <body>
+
   <!-- Navigation bar -->
   <div class="navbar">
-  <a href="index.php">Sample Website</a>
+  <a href="home.php.">Sample Website</a>
        
         <!-- You can add more links here -->
     </div>
 
 
+    <div class="main">
+    <div>
+    <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Log Out?</h2>
+      <p>Are you sure you want to log out?</p>
+      <div class="passbuttonContainer">
 
-    
-    <div class="container">
-<h3>Reset Password</h3>
-
-<form  method="post" >
-  <label for="new-password">New Password:</label><br>
-  <input type="password" id="new-password" name="new-password" ><br>
-  <!-- <span id="new-password-error" class="error"></span><br><br> -->
-  
-  <label for="confirm-password">Confirm Password:</label><br>
-  <input type="password" id="confirm-password" name="confirm-password" ><br>
-  <!-- <span id="confirm-password-error" class="error"></span><br><br> -->
-  
-  <br><input type="submit" value="Reset Password" name="reset">
-</form>
+  <button id="confirmBtn">Confirm</button>
+  <button id="cancelBtn">Cancel</button>
+</div>
     </div>
+  </div>
+
+            
 
 
+    <div class="container">
+        <h1>Welcome, <?php echo htmlspecialchars($firstname); ?>!</h1>
+        <p>Login successful. This is your home page.</p>
+        <!-- Additional content for the home page can be added here -->
+        <form action="logout.php" method="post">
+     <!-- Example input button using the new style -->
+     
+     <input type="button" id="logoutBtn" name="logout" value="Logout" class="styled-button">
+
+    </div>
+    </form> <br>
+  
+       
+     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1xn54DMo2qIqBuMqHtUsFd?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+ 
+    <script>
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      document.getElementById('logoutModal').style.display = 'block';
+    });
+
+    document.querySelector('.close').addEventListener('click', function() {
+      document.getElementById('logoutModal').style.display = 'none';
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+      document.getElementById('logoutModal').style.display = 'none';
+    });
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+      // Redirect to logout PHP script or perform logout actions here
+      // For example, redirecting to a PHP logout script
+      window.location.href = 'logout.php';
+    });
+  </script>
+
+  <?php
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Perform logout actions here, for example:
+    // Destroy session, clear cookies, etc.
+    // Redirect to login page after logout
+    header('Location: login.php');
+    exit();
+  }
+  ?>
 
 </body>
 </html>
-
-
-
-
-
