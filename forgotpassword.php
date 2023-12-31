@@ -10,9 +10,9 @@ $time = $tokenAndTimeArray[1];
 $token  = $tokenAndTimeArray[0];
 
 $tokenurl = $_GET['token'];
-$expiration = $time+60;
+$expiration = $time+3600;
 // echo $tokenurl;
-echo $time." ".$expiration." ".$token." ".$tokenurl;
+// echo $time." ".$expiration." ".$token." ".$tokenurl;
 
 if ($tokenurl === $token && $time<$expiration) {
 if (isset($_GET['id'])) {
@@ -41,6 +41,7 @@ header("location:index.php");
 
       echo"pass updated.";
       header("location:index.php");
+      exit();
       
           }else {
             echo"password did not match.";
@@ -50,7 +51,7 @@ header("location:index.php");
     }
   
 }else{
-  echo "token expired";
+  echo "Link expired";
   unset($_SESSION['tok']);
  
   exit();

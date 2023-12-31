@@ -4,6 +4,7 @@ session_start();
 require_once './include/connect/dbcon.php';
 require_once 'otp.php';
 
+$message = ''; // Initialize $message variable
 $showPopup = false; // Initialize $showPopup variable
 
 try {
@@ -24,13 +25,13 @@ try {
                 forgotpass($email, $fname, $id);
                 $showPopup = true; // Set the flag to display the success popup
             } else {
-                $message = 'Invalid email, make sure you are already registered.';
+                $message = '<span style="color: red;">Invalid email, make sure you are already registered.</span>';
+
             }
         }
     }
 } catch (PDOException $error) {
-    echo $error->getMessage();
-    exit;
+    $message = $error->getMessage(); // Assigning error message to $message variable
 }
 ?>
 
@@ -82,7 +83,6 @@ try {
     <div class="overlay" id="overlay"></div>
 
 
-
 <div class="container">
     <h3>Forgot Password</h3>
     <form id="emailForm" method="POST" onsubmit="showLoader(); ">
@@ -91,28 +91,21 @@ try {
         <input type="submit" value="Submit" id="submitButton" name="reset">
         <span id="timer" style="display: none;"></span>
     </form>
-    <p id="statusMessage"></p>
+    <p id="statusMessage"><?php echo $message; ?></p> <!-- Displaying PHP error message -->
 </div>
 
+<div class="overlay" id="overlay">
+    <div class="loader"></div>
+</div>
 
-    <!-- Add overlay to HTML -->
-    <div class="overlay" id="overlay">
-        <div class="loader"></div>
+<?php if ($showPopup) { ?>
+    <div class="popup" id="popup">
+        <img src="./include/img/404-tick.png">
+        <h3> Success! </h3>
+        <p>Please check your email. Thanks!</p>
+        <button type="button" onclick="closePopup()">OK</button>
     </div>
-
-    <?php if ($showPopup) { ?>
-        <div class="popup" id="popup">
-            <img src="./include/img/404-tick.png">
-            <h3> Success! </h3>
-            <p>Please check your email. Thanks!</p>
-            <button type="button" onclick="closePopup()">OK</button>
-        </div>
-        
-    <?php } elseif (isset($message)) {
-        echo '<p class="red-text">' . $message . '</p>';
-    } ?>
-</div>
-
+<?php } ?>
 <script>
 
        // JavaScript to show/hide loader and overlay

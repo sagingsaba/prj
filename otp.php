@@ -173,7 +173,7 @@ $_SESSION['tok'] = $token ."-".$time;
     $mail->Subject = 'Forgot Password';
     $mail->Body = "<h2>Change Password Request</h2><br>
                Hi " . $firstname . '<br>
-               Here is the link to change your password <a href="http://localhost/prj/forgotpassword.php?id='.$id.'&token='.$token.'">Forgot Password</a>
+               Your change password is about to expire in 60 seconds. Please enter a new password. Here is the link to change your password <a href="http://localhost/prj/forgotpassword.php?id='.$id.'&token='.$token.'">Forgot Password</a>
                ,
                if you did not request this you can ignore it safely.'; 
     $mail->AltBody = 'Here is: <a href="http://localhost/prj/forgotpassword.php?id='.$id.'&token='.$token.'">Forgot Password</a>';

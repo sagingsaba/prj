@@ -6,4 +6,5 @@ try {
 } catch (PDOException $e) {
     die("error".$e->getMessage());
 }
-?>
+?><?php 
+    
