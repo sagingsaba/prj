@@ -51,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
+    <link rel="icon" type="image/png" href="./include/img/logo.png">
     <style>
         /* Loader styles */
         .loader {

@@ -63,6 +63,7 @@ header("location:index.php");
 <head>
   <title>Reset Password</title>
   <link rel="stylesheet" type="text/css" href="./include/style/style.css">
+  <link rel="icon" type="image/png" href="./include/img/logo.png">
   <style>
     .error {
       color: red;

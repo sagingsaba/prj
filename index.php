@@ -62,6 +62,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Sample</title>
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
+    <link rel="icon" type="image/png" href="./include/img/logo.png">
 
 </head>
 

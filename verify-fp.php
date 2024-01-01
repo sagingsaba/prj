@@ -42,6 +42,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
+    <link rel="icon" type="image/png" href="./include/img/logo.png">
        <style>
         /* Loader styles */
         .loader {
@@ -99,12 +100,14 @@ try {
 </div>
 
 <?php if ($showPopup) { ?>
-    <div class="popup" id="popup">
-        <img src="./include/img/404-tick.png">
-        <h3> Success! </h3>
-        <p>Please check your email. Thanks!</p>
-        <button type="button" onclick="closePopup()">OK</button>
-    </div>
+    <div class="overlaypop" id="overlaypop"></div>
+<div class="popup" id="popup">
+    <img src="./include/img/404-tick.png">
+    <h3>Success!</h3>
+    <p>Please check your email. Thanks!</p>
+    <button type="button" onclick="closePopup()">OK</button>
+</div>
+
 <?php } ?>
 <script>
 
@@ -119,17 +122,16 @@ try {
         overlay.classList.toggle("show");
     }
 
-    // Function to open the popup
     function openPopup() {
-        const popup = document.getElementById("popup");
-        popup.classList.add("open-popup");
-    }
-  
-    // Function to close the popup
-    function closePopup() {
-        const popup = document.getElementById("popup");
-        popup.classList.remove("open-popup");
-    }
+    document.getElementById("overlaypop").style.display = "block";
+    document.getElementById("popup").classList.add("open-popup");
+}
+
+function closePopup() {
+    document.getElementById("overlaypop").style.display = "none";
+    document.getElementById("popup").classList.remove("open-popup");
+}
+
 
     // Add an event listener to the form submission
     const form = document.getElementById("emailForm");

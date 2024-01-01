@@ -16,14 +16,15 @@ $firstname = $_SESSION["firstname"];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
-    <title>Welcome</title>
+    <link rel="icon" type="image/png" href="./include/img/logo.png">
+    <title>Home</title>
 
 </head>
 <body>
-
   <!-- Navigation bar -->
   <div class="navbar">
   <a href="home.php.">Sample Website</a>
+  
        
         <!-- You can add more links here -->
     </div>
@@ -33,7 +34,7 @@ $firstname = $_SESSION["firstname"];
     <div>
     <div id="logoutModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+
       <h2>Log Out?</h2>
       <p>Are you sure you want to log out?</p>
       <div class="passbuttonContainer">
@@ -44,9 +45,7 @@ $firstname = $_SESSION["firstname"];
     </div>
   </div>
 
-            
-
-
+          
     <div class="container">
         <h1>Welcome, <?php echo htmlspecialchars($firstname); ?>!</h1>
         <p>Login successful. This is your home page.</p>
@@ -68,9 +67,7 @@ $firstname = $_SESSION["firstname"];
       document.getElementById('logoutModal').style.display = 'block';
     });
 
-    document.querySelector('.close').addEventListener('click', function() {
-      document.getElementById('logoutModal').style.display = 'none';
-    });
+  
 
     document.getElementById('cancelBtn').addEventListener('click', function() {
       document.getElementById('logoutModal').style.display = 'none';
