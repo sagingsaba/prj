@@ -23,7 +23,7 @@ $firstname = $_SESSION["firstname"];
 <body>
   <!-- Navigation bar -->
   <div class="navbar">
-  <a href="home.php.">Sample Website</a>
+  <a href="home.php">Sample Website</a>
   
        
         <!-- You can add more links here -->
