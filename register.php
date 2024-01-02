@@ -13,8 +13,9 @@ if (isset($_POST['register'])) {
     $middlename = htmlspecialchars(trim($_POST['regmiddlename'] ?? ''));
     $lastname = htmlspecialchars(trim($_POST['reglastname'] ?? ''));
     $email = htmlspecialchars(trim($_POST['regemail'] ?? ''));
-
-    $checkQuery = "SELECT email FROM `user` WHERE `email` = ?";
+    
+if(filter_var($email, FILTER_VALIDATE_EMAIL) !== false){
+     $checkQuery = "SELECT email FROM `user` WHERE `email` = ?";
     $checkResult = $pdoConnect->prepare($checkQuery);
     $checkResult->execute([$email]);
     $existingUser = $checkResult->fetch(PDO::FETCH_ASSOC);
@@ -36,6 +37,11 @@ if (isset($_POST['register'])) {
         header("location:verify.php");
         exit();
     }
+    
+} else{
+       $message = "You entered an invalid email. Please try again!";
+}
+   
 }
 ?>
 
@@ -46,7 +52,7 @@ if (isset($_POST['register'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to PRJ</title>
     <link rel="stylesheet" type="text/css" href="./include/style/style.css">
-    <link rel="icon" type="image/png" href="./include/img/logo.png">
+        <link rel="icon" type="image/png" href="./include/img/logo.png">
     <style>
         /* Loader styles */
         .loader {
@@ -109,6 +115,7 @@ if (isset($_POST['register'])) {
         }
         ?>
     </div>
+  
 
     <script>
         // JavaScript to show/hide loader and overlay
