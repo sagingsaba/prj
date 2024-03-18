@@ -45,7 +45,7 @@ $firstname = $_SESSION["firstname"];
     </div>
   </div>
 
-          
+          <!-- efwefwefwe -->
     <div class="container">
         <h1>Welcome, <?php echo htmlspecialchars($firstname); ?>!</h1>
         <p>Login successful. This is your home page.</p>
