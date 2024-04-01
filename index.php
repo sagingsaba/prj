@@ -68,7 +68,7 @@ try {
 
 <body>
 
-  <!-- Navigation bar -->
+  <!-- Navigation barrrrr -->
   <div class="navbar">
         <a href="index.php">Sample Website</a>
        
